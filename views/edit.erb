@@ -1,0 +1,8 @@
+<form method="post" action="/todos/<%= @id %>/edit">
+    <input type "hidden" name="_method" value="put" />
+    <fieldset>
+        <label for= "todo">Edit <%= @todotext %> to: </label>
+        <input type="text" name="todo" value="<%= @todotext %>" autofocus required>
+    </fieldset>
+    <input type="submit" value="Edit">
+</form>
