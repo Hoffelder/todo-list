@@ -1,0 +1,56 @@
+<div class="content">
+    <% if @todos.empty? %>
+    <p>
+        Your to-do list is empty.
+    </p>
+    <fieldset>
+        <form method="post" action="/todos/">
+            <input type="text" name="todo" placeder="e.g. call brother" autofocus="autofocus" required="required">
+            <input type="submit" value="Add new item">
+        </form>
+    </fieldset>
+
+    <% else %>
+    <fieldset>
+        <form method="post" action="/todos/">
+            <input type="text" name="todo" placeder="e.g. call brother" autofocus="autofocus" required="required">
+            <input type="submit" value="Add new item">
+        </form>
+    </fieldset>
+
+    <% @status.each_with_index do |todoentry, id| %>
+        <div class="todo">
+            <% if todoentry[:completed] == true %>
+                <p class="todo completed">
+                    <%= todoentry[:todo] %>
+                </p> 
+            <% else %>
+                <p class="todo incomplete"><%= todoentry[:todo] %></p>
+            <% end %>
+
+            <div class= "todo-options">
+                <form method= "get" action="/todos/<%= id %>/edit">
+                    <input class="amend-todo" type="submit" value="📝 Edit">
+                </form>
+
+                <% if todoentry[:completed] == false %>
+                    <form method="post" action="/todos/<%= id%>/complete">
+                        <input type="hidden" name="_method" value="put"/>
+                        <input class="amend-todo" type="submit" value="✅ Done">
+                    </form>
+                <% else %>
+                    <form method="post" action="/todos/<%= id%>/complete">
+                        <input type="hidden" name="_method" value="put"/>
+                        <input class="amend-todo" type="submit" value="❌ Uncomplete">
+                    </form>
+                <% end %>
+
+                <form method="post" action="/todos/<%= id%>">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input class="amend-todo" type="submit" value="🗑 Delete">
+                </form>
+            </div>
+        </div>
+        <% end %>
+    <% end %>
+</div>
