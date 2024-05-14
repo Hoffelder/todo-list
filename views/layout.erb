@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <title>To Do List</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="../public/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <a href="/">
+                    <h1>To Do List</h1>
+                </a>
+                <hr>
+                <% if @todos.empty? %>
+
+                <% else %>
+                <nav>
+                    <ul>
+                        <form method="get" action="/">
+                            <li><
+                                View:
+                            </li>
+                            <li><input class="filter-todos" type="submit" value="all" name="status"></li>
+                            <li><input class="filter-todos" type="submit" value="incomplete" name="status"></li>
+                            <li><input class="filter-todos" type="submit" value="complete" name="status"></li>
+                        </form>
+                    </ul>
+                </nav>
+                <hr>
+                <nav>
+                    <ul>
+                        <li>
+                            <form method="post" action="/todos/delete_done">
+                                <input class="filter-todos" type="submit" value="🗑️ Clear done items">
+                            </form>
+                        </li>
+
+                        <li>
+                            <p class="score">
+                                📃 Items to complete: <%= @counter %>
+                            </p>
+                        </li>
+                        <hr>
+
+                    </ul>
+
+                </nav>
+                <% end %>
+            </header>
+
+            <section>
+                <%= yield %>
+            </section>
+            <br>
+
+        </div>
+    </body>
+</html>
